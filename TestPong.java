@@ -1,9 +1,10 @@
+
 import acm.program.*;
 import acm.graphics.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Dinosaur extends GraphicsProgram {
+public class TestPong extends GraphicsProgram {
 	private static final long serialVersionUID = 1L;
 	private static final int WIN_WIDTH = 1024;
 	private static final int WIN_HEIGTH = 600;
@@ -64,10 +65,12 @@ public class Dinosaur extends GraphicsProgram {
 		x = 2;
 		int a = 1;
 		int b = -1;
+		double c = -0.6;
 		int score1 = 0;
 		int score2 = 0;
 		while (true) {
-			if (movimiento.equals("up1")) {
+//---------------------------------------------------------------------------------------------------------------------------------
+			if (movimiento.equals("up2")) {
 				if (Ball.getX() == Player2.getX() - Ball.getWidth() && Ball.getY() >= Player2.getY() - Ball.getHeight()/2 && Ball.getY() + Ball.getHeight() <= Player2.getY() + Player2.getHeight() + Ball.getHeight()/2) {
 					a = -1;
 				}
@@ -76,52 +79,43 @@ public class Dinosaur extends GraphicsProgram {
 				}
 				if (Ball.getY() == limitBackgroundY1) {
 					b = 1;
-				}
-				else if (Ball.getY() == limitBackgroundY2 - Ball.getHeight()) {
-					b = -1;
-				}
-				
-				Player1.move(0, -1);
-					Ball.move(a, b);
-				
-				
-			}
-			else if (movimiento.equals("up2")) {
-				if (Ball.getX() == Player2.getX() - Ball.getWidth() && Ball.getY() >= Player2.getY() - Ball.getHeight()/2 && Ball.getY() + Ball.getHeight() <= Player2.getY() + Player2.getHeight() + Ball.getHeight()/2) {
-					a = -1;
-				}
-				else if (Ball.getX() == Player1.getX() + Player1.getWidth() && Ball.getY() >= Player1.getY() - Ball.getHeight()/2 && Ball.getY() + Ball.getHeight() <= Player1.getY() + Player1.getHeight() + Ball.getHeight()/2) {
-					a = 1;
-				}
-				if (Ball.getY() == limitBackgroundY1) {
-					b = 1;
+					c = 0.6;
+
 				}
 				else if (Ball.getY() == limitBackgroundY2 -  Ball.getHeight()) {
 					b = -1;
+					c = -0.6;
+
 				}
 				
 				Player2.move(0, -1);
+				
 				Ball.move(a, b);
+				if (Ball.getY() + Ball.getHeight()/2 > Player1.getY() + Player1.getHeight() /2 && Ball.getX() > Player1.getX() + Player1.getWidth() && Ball.getX() + Ball.getWidth()/2 < WIN_WIDTH/2) {
+					Player1.move(0, 1);
+				}
+				else if (Ball.getY() + Ball.getHeight()/2 < Player1.getY() + Player1.getHeight() /2 && Ball.getX() > Player1.getX() + Player1.getWidth() && Ball.getX() + Ball.getWidth()/2 < WIN_WIDTH/2) {
+					Player1.move(0,-1);
+				}
+				else if (Player1.getY() + Player1.getHeight()/2 == 225) {
+					Player1.move(0, 0);
+				}
+				else if (Player1.getY() + Player1.getHeight()/2 > 225) {
+					Player1.move(0, -1);
+					if (Player1.getY() + Player1.getWidth()/2 == 225) {
+						Player1.move(0, 0);
+					}
+				}
+				else if (Player1.getY() + Player1.getHeight()/2 < 225) {
+					Player1.move(0, 1);
+					if (Player1.getY() + Player1.getWidth()/2 == 225) {
+						Player1.move(0, 0);
+					}
+				}
+
 				
 			}
-			else if (movimiento.equals("stop1")) {
-				if (Ball.getX() == Player2.getX() - Ball.getWidth() && Ball.getY() >= Player2.getY() - Ball.getHeight()/2 && Ball.getY() + Ball.getHeight() <= Player2.getY() + Player2.getHeight() + Ball.getHeight()/2) {
-					a = -1;
-				}
-				else if (Ball.getX() == Player1.getX() + Player1.getWidth() && Ball.getY() >= Player1.getY() - Ball.getHeight()/2 && Ball.getY() + Ball.getHeight() <= Player1.getY() + Player1.getHeight() + Ball.getHeight()/2) {
-					a = 1;
-				}
-				if (Ball.getY() == limitBackgroundY1) {
-					b = 1;
-				}
-				else if (Ball.getY() == limitBackgroundY2 -  Ball.getHeight()) {
-					b = -1;
-				}
-				
-				Player1.move(0, 0);
-				Ball.move(a, b);
-				
-			}
+//---------------------------------------------------------------------------------------------------------------
 			else if (movimiento.equals("stop2")) {
 				if (Ball.getX() == Player2.getX() - Ball.getWidth() && Ball.getY() >= Player2.getY() - Ball.getHeight()/2 && Ball.getY() + Ball.getHeight() <= Player2.getY() + Player2.getHeight() + Ball.getHeight()/2) {
 					a = -1;
@@ -131,34 +125,43 @@ public class Dinosaur extends GraphicsProgram {
 				}
 				if (Ball.getY() == limitBackgroundY1) {
 					b = 1;
+					c = 0.7;
 				}
 				else if (Ball.getY() == limitBackgroundY2 -  Ball.getHeight()) {
 					b = -1;
+					c = -0.7;
+
 				}
 				
 				Player2.move(0, 0);
-				Ball.move(a, b);
 				
-			}
+			
+				Ball.move(a, b);
+				if (Ball.getY() + Ball.getHeight()/2 > Player1.getY() + Player1.getHeight() /2 && Ball.getX() > Player1.getX() + Player1.getWidth() && Ball.getX() + Ball.getWidth()/2 < WIN_WIDTH/2) {
+					Player1.move(0, 1);
+				}
+				else if (Ball.getY() + Ball.getHeight()/2 < Player1.getY() + Player1.getHeight() /2 && Ball.getX() > Player1.getX() + Player1.getWidth() && Ball.getX() + Ball.getWidth()/2 < WIN_WIDTH/2) {
+					Player1.move(0,-1);
+				}
+				else if (Player1.getY() + Player1.getHeight()/2 == 225) {
+					Player1.move(0, 0);
+				}
+				else if (Player1.getY() + Player1.getHeight()/2 > 225) {
+					Player1.move(0, -1);
+					if (Player1.getY() + Player1.getWidth()/2 == 225) {
+						Player1.move(0, 0);
+					}
+				}
+				else if (Player1.getY() + Player1.getHeight()/2 < 225) {
+					Player1.move(0, 1);
+					if (Player1.getY() + Player1.getWidth()/2 == 225) {
+						Player1.move(0, 0);
+					}
+				}
 
-			else if (movimiento.equals("down1")) {
-				if (Ball.getX() == Player2.getX() - Ball.getWidth() && Ball.getY() >= Player2.getY() - Ball.getHeight()/2 && Ball.getY() + Ball.getHeight() <= Player2.getY() + Player2.getHeight() + Ball.getHeight()/2) {
-					a = -1;
-				}
-				else if (Ball.getX() == Player1.getX() + Player1.getWidth() && Ball.getY() >= Player1.getY() - Ball.getHeight()/2 && Ball.getY() + Ball.getHeight() <= Player1.getY() + Player1.getHeight() + Ball.getHeight()/2) {
-					a = 1;
-				}
-				if (Ball.getY() == limitBackgroundY1) {
-					b = 1;
-				}
-				else if (Ball.getY() == limitBackgroundY2 -  Ball.getHeight()) {
-					b = -1;
-				}
-				
-				Player1.move(0, 1);
-				Ball.move(a, b);
 				
 			}
+//---------------------------------------------------------------------------------------------------------------
 			else if (movimiento.equals("down2")) {
 				if (Ball.getX() == Player2.getX() - Ball.getWidth() && Ball.getY() >= Player2.getY() - Ball.getHeight()/2 && Ball.getY() + Ball.getHeight() <= Player2.getY() + Player2.getHeight() + Ball.getHeight()/2) {
 					a = -1;
@@ -168,34 +171,67 @@ public class Dinosaur extends GraphicsProgram {
 				}
 				if (Ball.getY() == limitBackgroundY1) {
 					b = 1;
+					c = 1;
+
 				}
 				else if (Ball.getY() == limitBackgroundY2 -  Ball.getHeight()) {
 					b = -1;
+					c = -1;
+
 				}
 				
 				Player2.move(0, 1);
+				if (Ball.getY() + Ball.getHeight()/2 > Player1.getY() + Player1.getHeight() /2) {
+					Player1.move(0, 1);
+				}
+				else if (Ball.getY() + Ball.getHeight()/2 > Player1.getY() + Player1.getHeight() /2) {
+					Player1.move(0,-1);
+				}
+				
+				
 				Ball.move(a, b);
 				
-				
+				if (Ball.getY() + Ball.getHeight()/2 > Player1.getY() + Player1.getHeight() /2 && Ball.getX() > Player1.getX() + Player1.getWidth() && Ball.getX() + Ball.getWidth()/2 < WIN_WIDTH/2) {
+					Player1.move(0, 1);
+				}
+				else if (Ball.getY() + Ball.getHeight()/2 < Player1.getY() + Player1.getHeight() /2 && Ball.getX() > Player1.getX() + Player1.getWidth() && Ball.getX() + Ball.getWidth()/2 < WIN_WIDTH/2) {
+					Player1.move(0,-1);
+				}
+				else if (Player1.getY() + Player1.getHeight()/2 == 225) {
+					Player1.move(0, 0);
+				}
+				else if (Player1.getY() + Player1.getHeight()/2 > 225) {
+					Player1.move(0, -1);
+					if (Player1.getY() + Player1.getWidth()/2 == 225) {
+						Player1.move(0, 0);
+					}
+				}
+				else if (Player1.getY() + Player1.getHeight()/2 < 225) {
+					Player1.move(0, 1);
+					if (Player1.getY() + Player1.getWidth()/2 == 225) {
+						Player1.move(0, 0);
+					}
+				}
 			}
-			
+//----------------------------------------------------------------------------------------------------------------
 					if (Player1.getLocation().getY() > limitBackgroundY2 - Player1.getHeight()) {
-						x = 0;
-						Player1.setLocation(Player1.getLocation().getX(), limitBackgroundY2 - Player1.getHeight());;
+					
+						Player1.setLocation(Player1.getLocation().getX(), limitBackgroundY2 - Player1.getHeight());
 					}
 					else if (Player1.getLocation().getY() < limitBackgroundY1) {
-						x = 2;
+					
 						Player1.setLocation(Player1.getLocation().getX(), limitBackgroundY1);;
 					}
 					if (Player2.getLocation().getY() > limitBackgroundY2 - Player1.getHeight()) {
-						x = 0;
-						Player2.setLocation(Player2.getLocation().getX(), limitBackgroundY2 - Player1.getHeight());;
+						
+						Player2.setLocation(Player2.getLocation().getX(), limitBackgroundY2 - Player1.getHeight());
 					}
 					
 					else if (Player2.getLocation().getY() < limitBackgroundY1) {
 						x = 2;
-						Player2.setLocation(Player2.getLocation().getX(), limitBackgroundY1);;
+						Player2.setLocation(Player2.getLocation().getX(), limitBackgroundY1);
 					}
+//----------------------------------------------------------------------------------------------------------------------
 			if (Ball.getLocation().getX()< -2) {
 				Ball.setLocation(WIN_WIDTH/2, limitBackgroundY2/2);
 				score2 ++;
@@ -210,6 +246,7 @@ public class Dinosaur extends GraphicsProgram {
 				}
 				
 			}
+//----------------------------------------------------------------------------------------------------------------------
 			else if (Ball.getLocation().getX() > WIN_WIDTH) {
 				Ball.setLocation(WIN_WIDTH/2, limitBackgroundY2/2);
 				score1 ++;
@@ -226,34 +263,23 @@ public class Dinosaur extends GraphicsProgram {
 			pause(3);
 		}
 	}
+//---------------------------------------------------------------------------------------------------------------------
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_W) {
-			movimiento = "up1";
-			x = 2;
-		}
-		else if (e.getKeyCode() == KeyEvent.VK_S) {
-			movimiento = "down1";
-			x = 2;
-		}
-		else if (e.getKeyCode() == KeyEvent.VK_UP) {
+		
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			movimiento = "up2";
-			x = 2;
+		
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			movimiento = "down2";
-			x = 2;
+		
 		}
 	
 	}
 	public void keyReleased(KeyEvent e1) {
 
-		if (e1.getKeyCode() == KeyEvent.VK_W) {
-			movimiento = "stop1";
-		}
-		else if (e1.getKeyCode() == KeyEvent.VK_S) {
-			movimiento = "stop1";
-		}
-		else if (e1.getKeyCode() == KeyEvent.VK_UP) {
+		
+		if (e1.getKeyCode() == KeyEvent.VK_UP) {
 			movimiento = "stop2";
 		}
 		else if (e1.getKeyCode() == KeyEvent.VK_DOWN) {
