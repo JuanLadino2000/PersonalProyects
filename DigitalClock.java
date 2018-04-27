@@ -117,9 +117,6 @@ public class DigitalClock extends GraphicsProgram {
 					remove(minGraphDec);
 					remove(hrGraphUnd);
 					remove(hrGraphDec);
-					println ("hola mundo");
-					println ("hola papi");
-
 		}
 		
 	}
